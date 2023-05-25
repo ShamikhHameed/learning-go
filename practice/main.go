@@ -27,6 +27,7 @@ func main() {
 	}
 
 	content := string(bytes)
+	// fmt.Print(content)
 
 	tours := toursFromJson(content)
 	for _, tour := range tours {
@@ -56,5 +57,5 @@ func toursFromJson(content string) []Tour {
 }
 
 type Tour struct {
-	Name, Price	string
+	Name, Price string
 }
