@@ -5,17 +5,17 @@ import (
 )
 
 func main() {
-	
-	anInt := 43
-	var p = &anInt
-	fmt.Println("The value is ", *p)
+	var colors [3]string
+	colors[0] = "Red"
+	colors[1] = "Green"
+	colors[2] = "Blue"
+	fmt.Println(colors)
+	fmt.Println(colors[0])
 
-	value1 := 43.7
-	pointer1 := &value1
-	fmt.Println("The value is :", *pointer1)
+	var numbers = [5]int{5, 3, 1, 2, 4}
+	fmt.Println(numbers)
 
-	*pointer1 = *pointer1 / 3
-	fmt.Println("Value of pointer is :", *pointer1)
-	fmt.Println("Value is :", value1)
+	fmt.Println("Number of colors:", len(colors))
+	fmt.Println("Number of numbers:", len(numbers))
 
 }
