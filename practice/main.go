@@ -1,25 +1,25 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
-	"strings"
+	"math"
 )
 
 func main() {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Enter text : ")
-	input, _ := reader.ReadString('\n')
-	fmt.Println("You entered : ", input)
 
-	fmt.Print("Enter a number : ")
-	numInput, _ := reader.ReadString('\n')
-	aFloat, err := strconv.ParseFloat(strings.TrimSpace(numInput), 64)
-	if err != nil {
-		fmt.Print(err)
-	} else {
-		fmt.Print("Value of number : ", aFloat)
-	}
+	i1, i2, i3 := 23, 45, 56
+	intSum := i1 + i2 + i3
+	fmt.Println("Integer Sum : ", intSum)
+
+	f1, f2, f3 := 23.5, 45.8, 56.8
+	floatSum := f1 + f2 + f3
+	fmt.Println("Float Sum : ", floatSum)
+
+	floatSum = math.Round(floatSum*100) / 100
+	fmt.Println("The sum is now ", floatSum)
+
+	circleRadius := 15.5
+	circumference := circleRadius * 2 * math.Pi
+	fmt.Printf("Circumference: %.2f\n", circumference)
+
 }
