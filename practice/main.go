@@ -1,33 +1,60 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"io"
 	"io/ioutil"
-	"os"
+	"net/http"
+	"strings"
 )
+
+const url = "http://services.explorecalifornia.org/json/tours.php"
 
 func main() {
 
-	content := "Hello from Go!"
-	file, err := os.Create("./fromString.txt")
-	checkError(err)
-	length, err := io.WriteString(file, content)
-	checkError(err)
-	fmt.Printf("Wrote a file with %v characters\n", length)
-	defer file.Close()
-	defer readFile("./fromString.txt")
-	
-}
-
-func checkError(err error) {
+	resp, err := http.Get(url)
 	if err != nil {
 		panic(err)
 	}
+
+	fmt.Printf("Response type: %T\n", resp)
+
+	defer resp.Body.Close()
+
+	bytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+
+	content := string(bytes)
+
+	tours := toursFromJson(content)
+	for _, tour := range tours {
+		fmt.Println(tour.Name)
+	}
+	
 }
 
-func readFile(fileName string) {
-	data, err := ioutil.ReadFile(fileName)
-	checkError(err)
-	fmt.Println("Text read from file:", string(data))
+func toursFromJson(content string) []Tour {
+	tours := make([]Tour, 0, 20)
+
+	decoder := json.NewDecoder(strings.NewReader(content))
+	_, err := decoder.Token()
+	if err != nil {
+		panic(err)
+	}
+
+	var tour Tour
+	for decoder.More() {
+		err := decoder.Decode(&tour)
+		if err != nil {
+			panic(err)
+		}
+		tours = append(tours, tour)
+	}
+	return tours
+}
+
+type Tour struct {
+	Name, Price	string
 }
