@@ -5,17 +5,28 @@ import (
 )
 
 func main() {
+
+	theAnswer := 43
+	var result string
+
+	if theAnswer < 0 {
+		result = "Less than 0"
+	} else if theAnswer == 0 {
+		result = "Zero"
+	} else {
+		result = "Greater than zero"
+	}
+
+	fmt.Println(result)
+
+	if x := -34; x < 0 {
+		result = "Less than 0"
+	} else if theAnswer == 0 {
+		result = "Equal to Zero"
+	} else {
+		result = "Greater than zero"
+	}
+
+	fmt.Println(result)
 	
-	poodle := Dog{"Poodle", 10}
-	fmt.Println(poodle)
-	fmt.Printf("%+v\n", poodle)
-	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
-	poodle.Weight = 9
-	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
-
-}
-
-type Dog struct {
-	Breed string
-	Weight int
 }
