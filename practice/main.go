@@ -5,29 +5,32 @@ import (
 )
 
 func main() {
+
+	poodle := Dog{"Poodle", 10, "Woof!"}
+	fmt.Println(poodle)
+	fmt.Printf("%+v\n", poodle)
+	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
+
+	poodle.Speak()
+	poodle.Sound = "Arf!"
+	poodle.Speak()
+
+	poodle.SpeakThreeTimes()
+}
+
+// Dog is a struct
+type Dog struct {
+	Breed  string
+	Weight int
+	Sound string
+}
+
+func (d Dog) Speak() {
+	fmt.Println(d.Sound)
+}
+
+func (d Dog) SpeakThreeTimes() {
+	d.Sound = fmt.Sprintf("%v %v %v", d.Sound, d.Sound, d.Sound)
+	fmt.Printf(d.Sound)
 	
-	doSomething()
-	sum := addValue(3, 5)
-	fmt.Println("The sum is:", sum)
-
-	multiSum, count := addMultiValue(3, 5, 6, 7)
-	fmt.Println("Multi sum value:", multiSum)
-	fmt.Println("Multi sum count:", count)
-}
-
-func doSomething() {
-	fmt.Println("This prints a text")
-}
-
-func addValue(val1, val2 int) int {
-	return val1 + val2
-}
-
-func addMultiValue(values ...int) (int, int) {
-	total := 0
-	for _, v := range values {
-		total += v
-	}
-	return total, len(values)
-
 }
